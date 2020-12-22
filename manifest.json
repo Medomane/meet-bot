@@ -1,0 +1,18 @@
+{
+
+    "description": "Meet inspection.",
+    "manifest_version": 2,
+    "name": "Meet helper bot",
+    "version": "1.0",
+    "icons": {
+      "48": "icons/icon.png"
+    },
+  
+    "content_scripts": [
+      {
+        "matches": ["*://meet.google.com/*"],
+        "js": ["addsIndex.js"]
+      }
+    ]
+  
+  }

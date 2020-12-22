@@ -1,5 +1,7 @@
 const Discord = require("discord.js");
 const Sequelize = require('sequelize');
+const open = require('open');
+require('dotenv').config();
 
 const client = new Discord.Client()
 const sequelize = new Sequelize({
@@ -26,14 +28,14 @@ const history = sequelize.define('history', {
         defaultValue: false
     }
 });
-client.login(token);
+client.login(process.env.API_KEY);
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
     if(check()) history.sync();
 });
 
-client.on("message", async  msg => {
+client.on("message", async msg => {
     if (msg.author.bot) return;
     if(msg.channel.id === "790774106684915713"){
         cnt = msg.content;
@@ -41,16 +43,21 @@ client.on("message", async  msg => {
             cnt.split(' ').forEach(e => {
                 if(e.includes("meet.google.com")){
                     url = "https://meet.google.com/"+e.split('/')[e.split('/').length-1];
-                    history.create({
-                        by: msg.author.id,
-                        link : url
-                    });
+                    openLink(url,msg);
                 }
             });
         }
     }
 });
-
+async function openLink(url,msg){
+    const ele = await history.findOne({ where: { link: url} });
+    history.create({
+        by : msg.author.id,
+        link : url,
+        done : true
+    });
+    if(!ele) open(url);
+}
 async function check(){
     try {
         await sequelize.authenticate();
