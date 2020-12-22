@@ -48,6 +48,7 @@ client.on("message", async msg => {
             });
         }
     }
+    else msg.react('789930303413682206');
 });
 async function openLink(url,msg){
     const ele = await history.findOne({ where: { link: url} });

@@ -13,5 +13,12 @@ var a = setInterval(function(){
                 },1000);
             }
         },500);
+        c = setInterval(function(){
+            let nbr = parseInt(document.querySelector("span[jscontroller='FTBAv']").textContent);
+            if( nbr > 5 && nbr < 10){
+                document.querySelector("div[jsname='CQylAd']").dispatchEvent(evObj);
+                clearInterval(c);
+            }
+        },1000);
     }
-},500)
+},500);
