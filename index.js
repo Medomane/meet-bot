@@ -26,7 +26,7 @@ const history = sequelize.define('history', {
         defaultValue: false
     }
 });
-client.login("NzkwNzY3NjM2OTI0ODU4Mzc4.X-FZwA.rGcthL77zFvBE4LpPt3yuPWi-Qo");
+client.login(token);
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
