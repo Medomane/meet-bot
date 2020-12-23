@@ -37,18 +37,15 @@ client.on("ready", () => {
 
 client.on("message", async msg => {
     if (msg.author.bot) return;
-    if(msg.channel.id === "790774106684915713"){
-        cnt = msg.content;
-        if(cnt.includes('meet.google.com')){
-            cnt.split(' ').forEach(e => {
-                if(e.includes("meet.google.com")){
-                    url = "https://meet.google.com/"+e.split('/')[e.split('/').length-1];
-                    openLink(url,msg);
-                }
-            });
-        }
+    cnt = msg.content;
+    if(cnt.includes('meet.google.com')){
+        cnt.split(' ').forEach(e => {
+            if(e.includes("meet.google.com")){
+                url = "https://meet.google.com/"+e.split('/')[e.split('/').length-1];
+                openLink(url,msg);
+            }
+        });
     }
-    else msg.react('789930303413682206');
 });
 async function openLink(url,msg){
     const ele = await history.findOne({ where: { link: url} });
